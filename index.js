@@ -6,15 +6,12 @@ dotenv.load();
 var serverKey = process.env.SERVER_KEY;
 var fcm = new FCM(serverKey);
 
-var message = { 
-    registration_ids: [],
-    priority: 'high',
-    content_available: true,
-    data: {
-        text: "hello"
-    }
-   
-};
+var message = {};
+message.to = "/topics/test"; // send to topic 'test'
+message.priority = "high";
+message.content_available = true;
+message.data = { text: "hello world" };
+
 
 fcm.send(message, function(err, response) {
     if (err) {
